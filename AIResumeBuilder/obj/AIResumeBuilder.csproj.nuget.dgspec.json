@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\AllCodePractice\\zPracticeMockTests\\CG\\AIResumeBuilder\\AIResumeBuilder.csproj": {}
+    "D:\\Users\\HP\\Downloads\\CapstoneBackup\\Capstone\\AIResumeBuilder\\AIResumeBuilder.csproj": {}
   },
   "projects": {
-    "D:\\AllCodePractice\\zPracticeMockTests\\CG\\AIResumeBuilder\\AIResumeBuilder.csproj": {
+    "D:\\Users\\HP\\Downloads\\CapstoneBackup\\Capstone\\AIResumeBuilder\\AIResumeBuilder.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\AllCodePractice\\zPracticeMockTests\\CG\\AIResumeBuilder\\AIResumeBuilder.csproj",
+        "projectUniqueName": "D:\\Users\\HP\\Downloads\\CapstoneBackup\\Capstone\\AIResumeBuilder\\AIResumeBuilder.csproj",
         "projectName": "AIResumeBuilder",
-        "projectPath": "D:\\AllCodePractice\\zPracticeMockTests\\CG\\AIResumeBuilder\\AIResumeBuilder.csproj",
+        "projectPath": "D:\\Users\\HP\\Downloads\\CapstoneBackup\\Capstone\\AIResumeBuilder\\AIResumeBuilder.csproj",
         "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "D:\\AllCodePractice\\zPracticeMockTests\\CG\\AIResumeBuilder\\obj\\",
+        "outputPath": "D:\\Users\\HP\\Downloads\\CapstoneBackup\\Capstone\\AIResumeBuilder\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

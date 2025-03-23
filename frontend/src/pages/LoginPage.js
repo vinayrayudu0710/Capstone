@@ -25,7 +25,7 @@ const LoginPage = ({setIsLoggedIn, setRole}) =>{
       }else{
         window.location.href = "/";
       }
-    }, 2000);
+    }, 5000);
 
     } catch (err) {
       setError('Invalid credentials');

@@ -47,7 +47,7 @@ namespace AIResumeBuilder.Controllers
                 return Unauthorized("Invalid credentials");
 
             var token = _tokenService.GenerateToken(user);
-            return Ok(new { Token = token });
+            return Ok(new TokenResponse { Token = token });
         }
     }
 }

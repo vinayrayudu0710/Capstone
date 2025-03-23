@@ -99,6 +99,7 @@ const AdminDashboard = () => {
         <thead>
           <tr>
             <th>Email</th>
+            <th>ID</th>
             <th>Role</th>
             <th>Actions</th>
           </tr>
@@ -107,6 +108,7 @@ const AdminDashboard = () => {
           {users.map((user) => (
             <tr key={user.id}>
               <td>{user.email}</td>
+              <td>{user.id}</td>
               <td>{user.role}</td>
               <td>
                 <button 
