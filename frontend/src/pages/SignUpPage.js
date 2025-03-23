@@ -7,6 +7,7 @@ const SignUpPage = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -17,7 +18,11 @@ const SignUpPage = () => {
     }
     try {
       await register(email, password, confirmPassword);
-      navigate('/login');
+      setRegistrationSuccess(true);
+
+      setTimeout(() =>{
+        navigate('/login');
+      }, 2000);
     } catch (err) {
       setError('Email already exists or registration failed');
     }
@@ -27,6 +32,9 @@ const SignUpPage = () => {
     <div className="mt-5">
       <h2>Sign Up</h2>
       {error && <div className="alert alert-danger">{error}</div>}
+      {registrationSuccess && (
+        <div className='alert alert-success alert-light bg-info'>Registration Successful! Redirecting to Login . . .</div>
+      )}
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label>Email</label>

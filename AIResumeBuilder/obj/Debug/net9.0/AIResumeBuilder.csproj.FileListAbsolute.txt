@@ -172,3 +172,4 @@ D:\AllCodePractice\zPracticeMockTests\CG\AIResumeBuilder\obj\Debug\net9.0\refint
 D:\AllCodePractice\zPracticeMockTests\CG\AIResumeBuilder\obj\Debug\net9.0\AIResumeBuilder.pdb
 D:\AllCodePractice\zPracticeMockTests\CG\AIResumeBuilder\obj\Debug\net9.0\AIResumeBuilder.genruntimeconfig.cache
 D:\AllCodePractice\zPracticeMockTests\CG\AIResumeBuilder\obj\Debug\net9.0\ref\AIResumeBuilder.dll
+D:\AllCodePractice\zPracticeMockTests\CG\AIResumeBuilder\obj\Debug\net9.0\AIResumeBuilder.sourcelink.json

@@ -71,7 +71,7 @@ namespace AIResumeBuilder.Controllers
                         {
                             parts = new[]
                             {
-                                new { text = $"Generate a professional resume Based on the details: {inputJson}" }
+                                new { text = $"Generate a professional resume with clear sections, headings, and bullet points based on these details, add random strengths at the bottom and the summary just after the github, don't add anything to be edited by my,  {inputJson}"}
                             }
                         }
                     }

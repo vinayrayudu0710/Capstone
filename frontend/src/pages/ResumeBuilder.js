@@ -1,10 +1,9 @@
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createResume } from '../services/resumeService';
 import { jsPDF } from 'jspdf';
 
-const ResumeBuilder =()=> {
+const ResumeBuilder = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -48,8 +47,12 @@ const ResumeBuilder =()=> {
       const response = await createResume(formData);
       setGeneratedResume(response.generatedResume);
       setLoading(false);
+      setIsEditing(false);
+      setTimeout(() =>{
+      })
     } catch (err) {
       console.error(err);
+    }finally{
       setLoading(false);
     }
   };
@@ -65,25 +68,104 @@ const ResumeBuilder =()=> {
 
   const handleDownload = () => {
     const doc = new jsPDF();
-    doc.text(generatedResume, 10, 10);
+    const lineHeight = 10;
+    let y = 10;
+  
+    const addTextWithStyle = (text, isHeading = false, isBullet = false) => {
+      if (isHeading) {
+        doc.setFontSize(16);
+        doc.setFont('helvetica', 'bold');
+        doc.text(text, 10, y);
+      } else if (isBullet) {
+        doc.setFontSize(12);
+        doc.setFont('helvetica', 'normal');
+        doc.text(`• ${text}`, 15, y);
+      } else {
+        doc.setFontSize(12);
+        doc.setFont('helvetica', 'normal');
+        doc.text(text, 10, y);
+      }
+      y += lineHeight;
+    };
+  
+    const lines = generatedResume.split('\n');
+    
+    lines.forEach((line) => {
+      const trimmedLine = line.trim();
+  
+      if (trimmedLine.startsWith('**') && trimmedLine.endsWith('**')) {
+        addTextWithStyle(trimmedLine.slice(2, -2), true);
+      } else if (trimmedLine.startsWith('*')) {
+        addTextWithStyle(trimmedLine.slice(1).trim(), false, true);  
+      } else if (trimmedLine === '') {
+        y += lineHeight / 2; 
+      } else {
+        addTextWithStyle(trimmedLine); 
+      }
+  
+      if (y > 280) {
+        doc.addPage();
+        y = 10;
+      }
+    });
+  
     doc.save('resume.pdf');
   };
+  
+
+  const formatResumeText = (text) => {
+    const lines = text.split('\n');
+
+    return lines.map((line, index) => {
+      const trimmedLine = line.trim();
+
+      if (trimmedLine.startsWith('**') && trimmedLine.endsWith('**')) {
+        const heading = trimmedLine.slice(2, -2);
+        return <h4 key={index} className="mt-3"><strong>{heading}</strong></h4>;
+      }
+
+      else if (trimmedLine.startsWith('*') && !trimmedLine.startsWith('**')) {
+        const bulletText = trimmedLine.slice(1).trim();
+        return (
+          <p key={index} className="mb-1" style={{ marginLeft: '20px' }}>
+            • {bulletText}
+          </p>
+        );
+      }
+
+      else if (trimmedLine === '') {
+        return <br key={index} />;
+      }
+
+      else {
+        return <p key={index} className="mb-2">{trimmedLine}</p>;
+      }
+    });
+  }
 
   if (generatedResume && !isEditing) {
     return (
-      <div className="mt-5">
-        <h2>Generated Resume</h2>
-        <pre>{generatedResume}</pre>
-        <button onClick={() => setIsEditing(true)} className="btn btn-primary mx-2">Edit</button>
-        <button onClick={handleSave} className="btn btn-success mx-2">Save</button>
-        <button onClick={handleDownload} className="btn btn-info mx-2">Download</button>
+      <div className="mt-5 container">
+        <h2 className="text-center mb-4">Generated Resume</h2>
+        <div className="card">
+          <div className="card-body">
+            <div className="resume-content">
+              {formatResumeText(generatedResume)}
+            </div>
+          </div>
+        </div>
+        <div className="text-center mt-4">
+          <button onClick={() => setIsEditing(true)} className="btn btn-primary mx-2">Edit</button>
+          <button onClick={handleSave} className="btn btn-success mx-2">Save</button>
+          <button onClick={handleDownload} className="btn btn-info mx-2">Download</button>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="mt-5">
-      <h2>Generate Resume</h2>
+    <div className="mt-5 container">
+      <h2 className="text-center mb-4">Generate Resume</h2>
       {loading && <div className="spinner-border" role="status"><span className="visually-hidden">Loading...</span></div>}
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
@@ -157,7 +239,7 @@ const ResumeBuilder =()=> {
           ))}
           <button type="button" className="btn btn-outline-primary" onClick={() => addField('languages')}>+</button>
         </div>
-        <button type="submit" className="btn btn-primary mx-2">Generate</button>
+        <button type="submit" className="btn btn-primary mx-2" disabled= {loading}>{loading ? 'Generating. . .' : 'Generate'}</button>
         <button type="button" className="btn btn-secondary mx-2" onClick={() => navigate('/')}>Cancel</button>
       </form>
     </div>
